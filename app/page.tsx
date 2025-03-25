@@ -237,12 +237,12 @@ export default function BarbeariaTotem() {
                       Data de nascimento
                     </label>
                     <input
-                      type="date"
-                      className={styles.input}
-                      value={birthDate}
-                      onChange={(e) => setBirthDate(e.target.value)}
-                      required
-                    />
+  type="date"
+  className={`${styles.input} ${styles.dateInput}`} // Adicione a classe dateInput
+  value={birthDate}
+  onChange={(e) => setBirthDate(e.target.value)}
+  required
+/>
                   </div>
                   <div className={styles.buttonGroup}>
                     <button

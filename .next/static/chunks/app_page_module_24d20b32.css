@@ -222,9 +222,150 @@
   margin-bottom: 1.5rem;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+.page-module__E0kJGG__dateInput::-webkit-calendar-picker-indicator {
   filter: invert(.5);
   cursor: pointer;
+}
+
+.page-module__E0kJGG__serviceSelection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.page-module__E0kJGG__sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+}
+
+.page-module__E0kJGG__sectionSubtitle {
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-module__E0kJGG__serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.page-module__E0kJGG__serviceCard {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: .5rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.page-module__E0kJGG__serviceCard:hover {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #2563eb1a;
+}
+
+.page-module__E0kJGG__serviceIcon {
+  font-size: 1.5rem;
+  color: #2563eb;
+  margin-bottom: .5rem;
+}
+
+.page-module__E0kJGG__serviceName {
+  font-weight: 600;
+  color: #111827;
+  text-align: center;
+}
+
+.page-module__E0kJGG__servicePrice {
+  font-weight: 700;
+  color: #10b981;
+}
+
+.page-module__E0kJGG__serviceDuration {
+  font-size: .75rem;
+  color: #6b7280;
+}
+
+.page-module__E0kJGG__selectInput {
+  width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid #d1d5db;
+  border-radius: .375rem;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.page-module__E0kJGG__selectInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #2563eb33;
+}
+
+.page-module__E0kJGG__selectedService {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: .375rem;
+}
+
+.page-module__E0kJGG__selectedServiceTitle {
+  font-size: .875rem;
+  color: #6b7280;
+  margin-bottom: .5rem;
+}
+
+.page-module__E0kJGG__serviceInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-module__E0kJGG__serviceIconSmall {
+  font-size: 1.25rem;
+  color: #2563eb;
+}
+
+.page-module__E0kJGG__serviceInfoName {
+  font-weight: 600;
+  color: #111827;
+}
+
+.page-module__E0kJGG__serviceInfoDetails {
+  font-size: .875rem;
+  color: #6b7280;
+}
+
+.page-module__E0kJGG__confirmationDetails {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: .375rem;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.page-module__E0kJGG__detailRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.page-module__E0kJGG__detailRow:last-child {
+  margin-bottom: 0;
+}
+
+.page-module__E0kJGG__detailLabel {
+  font-weight: 600;
+  color: #374151;
+}
+
+.page-module__E0kJGG__detailValue {
+  color: #111827;
 }
 
 
