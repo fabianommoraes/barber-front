@@ -33,9 +33,8 @@ export default function BarbeariaTotem() {
     { id: '4', name: 'Qualquer barbeiro disponível', specialty: '' }
   ];
 
-  interface PhoneSubmitEvent extends React.FormEvent<HTMLFormElement> {}
 
-  const handlePhoneSubmit = (e: PhoneSubmitEvent): void => {
+  const handlePhoneSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (phone.replace(/\D/g, '').length >= 10) {
       setStep(2);
@@ -44,9 +43,7 @@ export default function BarbeariaTotem() {
     }
   };
 
-  interface NameSubmitEvent extends React.FormEvent<HTMLFormElement> {}
-
-  const handleNameSubmit = (e: NameSubmitEvent): void => {
+  const handleNameSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (name.trim().length >= 3) {
       setStep(3);
@@ -55,9 +52,8 @@ export default function BarbeariaTotem() {
     }
   };
 
-  interface BirthDateSubmitEvent extends React.FormEvent<HTMLFormElement> {}
 
-  const handleBirthDateSubmit = (e: BirthDateSubmitEvent): void => {
+  const handleBirthDateSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const parsedDate: Date = parseISO(birthDate);
     if (isValid(parsedDate)) {
@@ -67,9 +63,8 @@ export default function BarbeariaTotem() {
     }
   };
 
-  interface FinalSubmitEvent extends React.FormEvent<HTMLFormElement> {}
 
-  const handleFinalSubmit = async (e: FinalSubmitEvent): Promise<void> => {
+  const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement> ): Promise<void> => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -96,15 +91,11 @@ export default function BarbeariaTotem() {
     setStep(6); // Avança para seleção de barbeiro
   };
 
-  interface BarberSelectEvent extends React.ChangeEvent<HTMLSelectElement> {}
-
-  const handleBarberSelect = (e: BarberSelectEvent): void => {
+  const handleBarberSelect = (e: React.ChangeEvent<HTMLSelectElement> ): void => {
     setSelectedBarber(e.target.value);
   };
 
-  interface BarberSubmitEvent extends React.FormEvent<HTMLFormElement> {}
-
-  const handleBarberSubmit = (e: BarberSubmitEvent): void => {
+  const handleBarberSubmit = (e: React.FormEvent<HTMLFormElement> ): void => {
     e.preventDefault();
     if (selectedBarber) {
       setIsConfirmed(true);
