@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { format, parseISO, isValid } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { FaPhone, FaUser, FaCalendarAlt, FaCheck, FaCut, FaShower, FaUserTie } from 'react-icons/fa';
+import { FaPhone, FaUser, FaCalendarAlt, FaCheck, FaCut, FaShower } from 'react-icons/fa';
 import styles from './page.module.css';
 
 export default function BarbeariaTotem() {
@@ -15,7 +15,7 @@ export default function BarbeariaTotem() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Novos estados para serviços e barbeiros
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedBarber, setSelectedBarber] = useState('');
   const [isConfirmed, setIsConfirmed] = useState(false);
 
@@ -33,7 +33,9 @@ export default function BarbeariaTotem() {
     { id: '4', name: 'Qualquer barbeiro disponível', specialty: '' }
   ];
 
-  const handlePhoneSubmit = (e) => {
+  interface PhoneSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handlePhoneSubmit = (e: PhoneSubmitEvent): void => {
     e.preventDefault();
     if (phone.replace(/\D/g, '').length >= 10) {
       setStep(2);
@@ -42,7 +44,9 @@ export default function BarbeariaTotem() {
     }
   };
 
-  const handleNameSubmit = (e) => {
+  interface NameSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleNameSubmit = (e: NameSubmitEvent): void => {
     e.preventDefault();
     if (name.trim().length >= 3) {
       setStep(3);
@@ -51,9 +55,11 @@ export default function BarbeariaTotem() {
     }
   };
 
-  const handleBirthDateSubmit = (e) => {
+  interface BirthDateSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleBirthDateSubmit = (e: BirthDateSubmitEvent): void => {
     e.preventDefault();
-    const parsedDate = parseISO(birthDate);
+    const parsedDate: Date = parseISO(birthDate);
     if (isValid(parsedDate)) {
       setStep(4);
     } else {
@@ -61,12 +67,14 @@ export default function BarbeariaTotem() {
     }
   };
 
-  const handleFinalSubmit = async (e) => {
+  interface FinalSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleFinalSubmit = async (e: FinalSubmitEvent): Promise<void> => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise<void>(resolve => setTimeout(resolve, 1500));
       setStep(5); // Avança para seleção de serviço
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
@@ -75,16 +83,28 @@ export default function BarbeariaTotem() {
     }
   };
 
-  const handleServiceSelect = (service) => {
+  interface Service {
+    id: number;
+    name: string;
+    icon: React.JSX.Element;
+    price: number;
+    duration: number;
+  }
+
+  const handleServiceSelect = (service: Service): void => {
     setSelectedService(service);
     setStep(6); // Avança para seleção de barbeiro
   };
 
-  const handleBarberSelect = (e) => {
+  interface BarberSelectEvent extends React.ChangeEvent<HTMLSelectElement> {}
+
+  const handleBarberSelect = (e: BarberSelectEvent): void => {
     setSelectedBarber(e.target.value);
   };
 
-  const handleBarberSubmit = (e) => {
+  interface BarberSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleBarberSubmit = (e: BarberSubmitEvent): void => {
     e.preventDefault();
     if (selectedBarber) {
       setIsConfirmed(true);
@@ -103,7 +123,11 @@ export default function BarbeariaTotem() {
     setIsConfirmed(false);
   };
 
-  const formatPhone = (value) => {
+  interface FormatPhone {
+    (value: string): string;
+  }
+
+  const formatPhone: FormatPhone = (value) => {
     const numericValue = value.replace(/\D/g, '');
     let formattedValue = '';
     
@@ -345,12 +369,12 @@ export default function BarbeariaTotem() {
                 <h3 className={styles.selectedServiceTitle}>Serviço selecionado:</h3>
                 <div className={styles.serviceInfo}>
                   <div className={styles.serviceIconSmall}>
-                    {selectedService.icon}
+                    {selectedService && selectedService.icon}
                   </div>
                   <div>
-                    <p className={styles.serviceInfoName}>{selectedService.name}</p>
+                    <p className={styles.serviceInfoName}>{selectedService?.name || 'Serviço não selecionado'}</p>
                     <p className={styles.serviceInfoDetails}>
-                      R$ {selectedService.price.toFixed(2)} • {selectedService.duration} min
+                      {selectedService ? `R$ ${selectedService.price.toFixed(2)} • ${selectedService.duration} min` : 'Serviço não selecionado'}
                     </p>
                   </div>
                 </div>
@@ -389,7 +413,7 @@ export default function BarbeariaTotem() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>Serviço:</span>
-                  <span className={styles.detailValue}>{selectedService.name}</span>
+                  <span className={styles.detailValue}>{selectedService?.name || 'Serviço não selecionado'}</span>
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>Barbeiro:</span>
@@ -400,7 +424,7 @@ export default function BarbeariaTotem() {
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>Valor:</span>
                   <span className={styles.detailValue}>
-                    R$ {selectedService.price.toFixed(2)}
+                    R$ {selectedService ? selectedService.price.toFixed(2) : '0.00'}
                   </span>
                 </div>
               </div>
